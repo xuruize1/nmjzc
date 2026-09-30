@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026届中考录取查询</title>
+<style>
+  :root{
+    --bg:#f2f6fb; --card:#fff; --main:#2f7df6; --main2:#19b89a; --text:#1f2d3d; --muted:#7a8aa0;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text);line-height:1.6;-webkit-text-size-adjust:100%}
+  .wrap{max-width:560px;margin:0 auto;padding:16px}
+  header{background:linear-gradient(135deg,var(--main),var(--main2));color:#fff;border-radius:16px;padding:22px 18px;text-align:center;box-shadow:0 6px 20px rgba(47,125,246,.25)}
+  header h1{font-size:20px;font-weight:700}
+  header p{font-size:13px;opacity:.92;margin-top:6px}
+  .tabs{display:flex;gap:8px;margin:16px 0}
+  .tabs button{flex:1;border:none;background:#fff;border-radius:10px;padding:12px;font-size:15px;color:var(--muted);cursor:pointer;box-shadow:0 2px 6px rgba(0,0,0,.04)}
+  .tabs button.active{color:#fff;background:linear-gradient(135deg,var(--main),var(--main2));font-weight:600}
+  .panel{background:var(--card);border-radius:14px;padding:18px;box-shadow:0 2px 10px rgba(0,0,0,.05);margin-bottom:16px}
+  .search-row{display:flex;gap:10px}
+  input[type=text]{flex:1;border:1.5px solid #e1e8f2;border-radius:10px;padding:12px 14px;font-size:16px;outline:none}
+  input[type=text]:focus{border-color:var(--main)}
+  button.go{background:linear-gradient(135deg,var(--main),var(--main2));color:#fff;border:none;border-radius:10px;padding:0 20px;font-size:16px;font-weight:600;cursor:pointer}
+  .result{margin-top:14px}
+  .res-item{background:#f6faff;border:1px solid #e1eefb;border-radius:10px;padding:12px 14px;margin-bottom:10px}
+  .res-school{font-size:16px;font-weight:700;color:var(--main)}
+  .res-snippet{font-size:13px;color:var(--muted);margin-top:4px;word-break:break-all}
+  .empty{color:var(--muted);font-size:14px;padding:8px 2px}
+  .intro{white-space:pre-wrap;font-size:14px;color:#3a4a5e;word-break:break-word;margin-top:16px;border-top:1px dashed #e1e8f2;padding-top:14px}
+  .about{white-space:pre-wrap;font-size:14px;color:#3a4a5e;word-break:break-word}
+  footer{text-align:center;color:var(--muted);font-size:12px;padding:8px 0 20px}
+  h2.sec{font-size:15px;margin-bottom:10px;color:var(--text)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>2026届中考录取查询</h1>
+    <p>输入考生姓名，一键查询录取去向</p>
+  </header>
+
+  <div class="tabs">
+    <button id="tabSearch" class="active" onclick="switchTab('search')">功能使用</button>
+    <button id="tabAbout" onclick="switchTab('about')">作者简介</button>
+  </div>
+
+  <div id="panelSearch" class="panel">
+    <div class="search-row">
+      <input type="text" id="nameInput" placeholder="请输入考生姓名" onkeydown="if(event.key==='Enter')doSearch()">
+      <button class="go" onclick="doSearch()">查询</button>
+    </div>
+    <div class="result" id="result"></div>
+    <div class="intro" id="introText"></div>
+  </div>
+
+  <div id="panelAbout" class="panel" style="display:none">
+    <h2 class="sec">作者简介</h2>
+    <div class="about" id="aboutText"></div>
+  </div>
+
+  <footer>数据由运营者整理，非官方发布渠道，结果仅供参考<br><span id="busuanzi_container_site_pv">总访问 <span id="busuanzi_value_site_pv"></span> 次</span> · <span id="busuanzi_container_site_uv">访客 <span id="busuanzi_value_site_uv"></span> 人</span></footer>
+</div>
+
+<script src="data.js"></script>
+<script>
+  function switchTab(t){
+    document.getElementById('tabSearch').classList.toggle('active', t==='search');
+    document.getElementById('tabAbout').classList.toggle('active', t==='about');
+    document.getElementById('panelSearch').style.display = t==='search'?'block':'none';
+    document.getElementById('panelAbout').style.display = t==='about'?'block':'none';
+  }
+  function makeSnippet(text, name){
+    var i = text.indexOf(name);
+    if(i<0) return '';
+    var start = Math.max(0, i-18);
+    var end = Math.min(text.length, i+name.length+18);
+    var s = text.slice(start,end).replace(/\s+/g,' ');
+    if(start>0) s='…'+s;
+    if(end<text.length) s=s+'…';
+    return s;
+  }
+  function doSearch(){
+    var name = (document.getElementById('nameInput').value||'').trim();
+    var box = document.getElementById('result');
+    if(!name){ box.innerHTML='<div class="empty">请输入考生姓名</div>'; return; }
+    var dict = window.DICT || {};
+    var html='';
+    var n=0;
+    for(var key in dict){
+      if(!Object.prototype.hasOwnProperty.call(dict,key)) continue;
+      if(key.indexOf(name)!==-1){
+        n++;
+        var snip = makeSnippet(key,name);
+        html += '<div class="res-item"><div class="res-school">'+escapeHtml(dict[key])+'</div>'+
+                (snip?'<div class="res-snippet">'+escapeHtml(snip)+'</div>':'')+'</div>';
+      }
+    }
+    if(n===0){ box.innerHTML='<div class="empty">未查询到「'+escapeHtml(name)+'」的录取信息。可能是名单中暂无该考生，或姓名写法不一致，可换个写法再试。</div>'; }
+    else { box.innerHTML = '<div class="empty">共找到 '+n+' 条匹配结果：</div>'+html; }
+  }
+  function escapeHtml(s){
+    return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});
+  }
+  document.getElementById('introText').textContent = window.INTRO || '';
+  document.getElementById('aboutText').textContent = window.ABOUT || '';
+</script>
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</body>
+</html>
