@@ -32,7 +32,7 @@ window.ABOUT = `【作者简介】  母校：
 
 <span style="color:#2b8a9e;font-weight:700"><b><b><b><b>打个小广：</b></b><span style="color:#e07b39">
 
-有需求线上一对一的  可加下方qq  高考成绩可查（doge）</b></b>
+有需求线上一对一的  可加下方qq  高考成绩可查.（doge）</b></b>
 
 
 如有问题欢迎反馈。
