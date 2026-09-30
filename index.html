@@ -18,6 +18,7 @@
   .search button{background:#2b8a9e;color:#fff;border:0;border-radius:10px;padding:0 20px;font-size:16px;cursor:pointer}
   .search button:active{opacity:.85}
   #result{min-height:20px;margin-bottom:16px}
+  .banner{background:#fff0f0;border:1px solid #ffc9c9;border-radius:10px;padding:12px 14px;margin-bottom:14px;color:#e02323;font-weight:700;text-align:center;font-size:15px;line-height:1.9}
   .tip{color:#e07b39;background:#fff4ec;padding:12px 14px;border-radius:10px}
   .ok{color:#2b8a9e;font-weight:700;margin-bottom:8px}
   .schools{list-style:none}
@@ -46,6 +47,7 @@
       <input id="nameInput" type="text" placeholder="请输入考生姓名" autocomplete="off">
       <button id="searchBtn">查询</button>
     </div>
+    <div class="banner" id="bannerBox"></div>
     <div id="result"></div>
     <div class="warn" id="schoolBox"></div>
     <div class="intro" id="introBox"></div>
@@ -65,6 +67,7 @@
 (function(){
   function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
   document.getElementById('introBox').innerHTML = '<h3>使用说明</h3><p>' + esc(window.INTRO||'') + '</p>';
+  document.getElementById('bannerBox').innerHTML = (window.MESSAGE||'').replace(/\n/g,'<br>');
   var schools = window.SUPPORTED_SCHOOLS||[];
   var sh = '<p class="warnTitle">⚠ 目前创作尚未完成，暂时只支持以下学校，其他学校暂不可查：</p><div class="chips">';
   schools.forEach(function(s){ sh+='<span class="chip">'+esc(s)+'</span>'; });

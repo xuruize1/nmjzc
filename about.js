@@ -7,7 +7,7 @@
 // ▓▓▓▓▓ 加粗 / 颜色 写法（直接写在下面反引号里就能生效）▓▓▓▓▓
 //   加粗：   <b>要加粗的字</b>
 //   颜色：   <span style="color:#e07b39">要变色的字</span>   （#e07b39 是橙色，可换成任意颜色）
-//   蓝色加粗：<span style="color:#2b8a9e;font-weight:700">字</span>
+//   蓝色加粗：<span style="color:#2b8a9e;font-weight:700">字<span style="color:#e07b39">
 //   （页面本来就是用 HTML 渲染简介的，所以这些标签不会被当普通文字显示）
 //
 // ▓▓▓▓▓ 加图片（任选一种，把整行复制到下面反引号 ` 里面任意位置）▓▓▓▓▓
@@ -20,8 +20,8 @@
 //      说明：本地和线上（联网时）都能显示，不用额外传图片文件。
 //
 // ▼▼▼ 只改下面这一行里【两个反引号 ` 之间】的文字，直接回车换行就行 ▼▼▼
-window.ABOUT = `【作者简介】
-
+window.ABOUT = `【作者简介】  母校：
+<img src="https://s41.ax1x.com/2026/09/30/pnG3oeH.png" style="width:100%;max-width:320px;border-radius:10px;margin:12px 0">
 <b>本程序作者只完成了数据的采集与处理</b>，前端呈现均由 WorkBuddy 完成。
 
 作者为2026高考生、60级<b>历城二中</b>毕业生，现就读于<b>中山大学</b>。
@@ -30,8 +30,13 @@ window.ABOUT = `【作者简介】
 
 本程序方便由名字查录取。由于重名、识别不清及程序尚未完成，<span style="color:#e07b39;font-weight:700">结果不一定准确</span>。
 
+<span style="color:#e07b39"><b><b><b><b>打个小广：</b></b><span style="color:#e07b39">
+
+有需求线上一对一的  可加下方qq  高考成绩可查（doge）</b></b>
+
+
 如有问题欢迎反馈。
-欢迎交流 QQ：<span style="color:#2b8a9e;font-weight:700">2173024594</span>
+学弟学妹有任何学习生活上的问题  欢迎交流 QQ：<span style="color:#2b8a9e;font-weight:700">2173024594</span>
 
 （想加图片？见本文件最上方注释，按两种写法任选其一，把 &lt;img&gt; 那行复制到上面即可。）
 `;
