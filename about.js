@@ -30,7 +30,7 @@ window.ABOUT = `【作者简介】  母校：
 
 本程序方便由名字查录取。由于重名、识别不清及程序尚未完成，<span style="color:#e07b39;font-weight:700">结果不一定准确</span>。
 
-<span style="color:#e07b39"><b><b><b><b>打个小广：</b></b><span style="color:#e07b39">
+<span style="color:#2b8a9e;font-weight:700"><b><b><b><b>打个小广：</b></b><span style="color:#e07b39">
 
 有需求线上一对一的  可加下方qq  高考成绩可查（doge）</b></b>
 
